@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { FirebaseProvider } from './providers/FirebaseProvider';
-import SignUp from './components/SignUp';
-import Login from './components/Login';
+// import SignUp from './components/SignUp';
+// import Login from './components/Login';
 import Home from './components/Home';
 import ProjectDetail from './components/ProjectDetail';
 import './App.css';

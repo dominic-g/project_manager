@@ -1,7 +1,7 @@
 // src/components/Home.js
 import React from 'react';
 import Header from './Header';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 
 const Home = ({ projects, notifications }) => {
   const pageTitle = "Home"

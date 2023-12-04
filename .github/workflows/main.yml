@@ -38,3 +38,4 @@ jobs:
           npx gh-pages -d build
         env:
           CI: false
+          GENERATE_SOURCEMAP: false

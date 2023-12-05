@@ -3,14 +3,19 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useAuth } from '../context/AuthContext';
+import { _debugErrorMap } from '../context/ErrorContext';
 
 const Signup = () => {
   const navigate = useNavigate();
   const { signup } = useAuth();
-  console.log('Signup Function:', signup);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [username, setUsername] = useState('');
+
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
@@ -20,11 +25,19 @@ const Signup = () => {
   const handleSignup = async () => {
     try {
       setError('');
-      await signup(email, password);
-      setSuccessMessage('Account created successfully. You can now log in.');
+      const error = await signup(email, password, firstName, lastName, username);
+      const fullCode = error.code;
+      const errorMsg = getErrorMessage(fullCode.replace(/auth\//g, ''));
+      if (errorMsg) {
+        setError(errorMsg);
+        errorRef.current && errorRef.current.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        setSuccessMessage('Account created successfully. You can now log in.');
+      }
     } catch (error) {
-      console.error('Signup Error:', error);
+
       setError('Failed to create an account. Please try again.');
+      errorRef.current && errorRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -44,6 +57,31 @@ const Signup = () => {
     setError(''); // Clear the error when password changes
     setSuccessMessage('');
   };
+  const handleFnameChange = (e) => {
+    setFirstName(e.target.value);
+    setError(''); // Clear the error when password changes
+    setSuccessMessage('');
+  };
+  const handleSnameChange = (e) => {
+    setLastName(e.target.value);
+    setError(''); // Clear the error when password changes
+    setSuccessMessage('');
+  };
+  const handleUnameChange = (e) => {
+    setUsername(e.target.value);
+    setError(''); // Clear the error when password changes
+    setSuccessMessage('');
+  };
+  const getErrorMessage = (errorCode) =>{
+    const errorMessage = _debugErrorMap[errorCode];
+
+    if (errorMessage) {
+      return errorMessage;
+    } else {
+      return 'An unknown error occurred. contact admin for assistance';
+    }
+  }
+
   return (
     <>
       <Helmet>
@@ -70,11 +108,11 @@ const Signup = () => {
               </h3>
               <div className="p-t-31 p-b-9">
                 <span className="txt1">
-                  Username
+                  Email
                 </span>
               </div>
               <div className="wrap-input100 validate-input" data-validate = "Email is required">
-                <input className="input100" name="email"  type="email" value={email}  onChange={handleEmailChange} />
+                <input className="input100" name="email"  type="email" value={email}  onChange={handleEmailChange} required/>
                 <span className="focus-input100"></span>
               </div>
               
@@ -85,9 +123,42 @@ const Signup = () => {
 
               </div>
               <div className="wrap-input100 validate-input" data-validate = "Password is required">
-                <input className="input100" type="password" name="pass" value={password} onChange={handlePasswordChange}/>
+                <input className="input100" type="password" name="pass" value={password} onChange={handlePasswordChange} required/>
                 <span className="focus-input100"></span>
               </div>
+              <hr className="m-t-30 m-b-10" />
+
+              <div className="p-t-15 p-b-9">
+                <span className="txt1">
+                  First Name
+                </span>
+              </div>
+              <div className="wrap-input100 validate-input" data-validate = "First Name is required">
+                <input className="input100" type="text" name="fname" value={firstName} onChange={handleFnameChange} required/>
+                <span className="focus-input100"></span>
+              </div>
+
+              <div className="p-t-31 p-b-9">
+                <span className="txt1">
+                  Last Name
+                </span>
+              </div>
+              <div className="wrap-input100 validate-input" data-validate = "Second Name is required">
+                <input className="input100" type="text" name="sname" value={lastName} onChange={handleSnameChange} required/>
+                <span className="focus-input100"></span>
+              </div>
+
+              <div className="p-t-31 p-b-9">
+                <span className="txt1">
+                  User Name
+                </span>
+              </div>
+              <div className="wrap-input100 validate-input" data-validate = "User Name is required">
+                <input className="input100" type="text" name="user" value={username} onChange={handleUnameChange} required/>
+                <span className="focus-input100"></span>
+              </div>
+
+              <hr className="m-t-30 m-b-10" />
 
               <div className="container-login100-form-btn m-t-37">
                 <button className="login100-form-btn">

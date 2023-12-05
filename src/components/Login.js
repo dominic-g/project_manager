@@ -42,14 +42,9 @@ const Login = () => {
   return (
     <>
       <Helmet>
-        <link rel="preload" href={`${process.env.PUBLIC_URL}/assets/util-login.css`} as="style" onload="this.onload=null;this.rel='stylesheet'"/>
-        <link rel="preload" href={`${process.env.PUBLIC_URL}/assets/main-login.css`} as="style" onload="this.onload=null;this.rel='stylesheet'"/>
-        <noscript>
-          {`
-            <link rel="stylesheet" type="text/css" href="${process.env.PUBLIC_URL}/assets/util-login.css" />
-            <link rel="stylesheet" type="text/css" href="${process.env.PUBLIC_URL}/assets/main-login.css" />
-          `}
-        </noscript>
+        <link rel="stylesheet" href={`${process.env.PUBLIC_URL}/assets/util-login.css`}/>
+        <link rel="stylesheet" href={`${process.env.PUBLIC_URL}/assets/main-login.css`}/>
+  
         <title>Login React Project Manager</title>
       </Helmet>
       <div className="limiter">
@@ -62,7 +57,7 @@ const Login = () => {
               <h3 ref={errorRef} className="error">{error && <p className="p-t-30">{error}</p>}</h3>
               <div className="p-t-31 p-b-9">
                 <span className="txt1">
-                  Username
+                  Login
                 </span>
               </div>
               <div className="wrap-input100 validate-input" data-validate = "Email is required">

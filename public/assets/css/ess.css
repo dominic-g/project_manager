@@ -11,7 +11,9 @@ ul {
   padding-left: 0;
   list-style: none;
 }
-
+body:not(.loading) .loader.spin{
+  display: none;
+}
 body.loading {
   width: 100%;
   min-height: 100vh;

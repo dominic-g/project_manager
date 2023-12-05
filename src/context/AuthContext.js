@@ -5,6 +5,7 @@ import { app, firestore } from '../firebase/firebaseConfig';
 
 const AuthContext = createContext();
 
+
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -20,12 +21,27 @@ const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, [auth]);
 
-  const signup = async (email, password) => {
+  const signup = async (email, password, firstName, lastName, username) => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+
+      await userCredential.user.updateProfile({
+        displayName: username,
+      });
+
+      const newUser = {
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
+        firstName,
+        lastName,
+        username
+      };
+
+      setUser(newUser);
     } catch (error) {
-      console.error('Sign up failed:', error.message);
-      throw error;
+      return error;
+      //throw error;
     }
   };
 
@@ -64,3 +80,4 @@ const useAuth = () => {
 };
 
 export { AuthProvider, useAuth };
+

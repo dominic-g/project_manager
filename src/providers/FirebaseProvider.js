@@ -2,12 +2,12 @@
 import React from 'react';
 import { AuthProvider } from '../context/AuthContext'; 
 import { FirestoreProvider } from '../context/FirestoreContext';
-import { firebase } from '../firebase/firebaseConfig';
+import { firestore } from '../firebase/firebaseConfig';
 
 const FirebaseProvider = ({ children }) => {
   return (
-    <AuthProvider firebase={firebase}>
-      <FirestoreProvider firebase={firebase}>
+    <AuthProvider firebase={firestore}>
+      <FirestoreProvider firebase={firestore}>
         {children}
       </FirestoreProvider>
     </AuthProvider>

@@ -1,7 +1,7 @@
 // context/AuthContext.js
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { firebase } from '../firebase/firebaseConfig';
+import { app, firestore } from '../firebase/firebaseConfig';
 
 const AuthContext = createContext();
 
@@ -9,7 +9,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const auth = getAuth(firebase);
+  const auth = getAuth(app);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
     return () => unsubscribe();
   }, [auth]);
 
-  const signUp = async (email, password) => {
+  const signup = async (email, password) => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
     } catch (error) {
@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
     }
   };
 
-  const signIn = async (email, password) => {
+  const signin = async (email, password) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
@@ -48,11 +48,12 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signUp, signIn, signOut: signOutUser }}>
+    <AuthContext.Provider value={{ user, loading, signup, signin, signOut: signOutUser }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
 
 const useAuth = () => {
   const context = useContext(AuthContext);

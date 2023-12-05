@@ -2,19 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="%PUBLIC_URL%/assets/images/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <meta name="title" content="React Project Manager">
+    <meta name="description" content="Discover seamless project management with our innovative React-based project manager. Streamline tasks, enhance collaboration, and boost productivity.">
+    <meta name="keywords" content="Project Manager, React Project Management, Project Management, task tracker, project organizer, project collaboration, React Task Tracker, Project Organizer in React, Task Management App, React Project Dashboard, Agile Project Management, React Project Planner, Scrum Board in React, Task Tracking System, React Project Collaboration, Project Status Tracker, React Project Scheduler, Kanban Board in React, React Gantt Chart, Sprint Planning in React, React Project Progress, Team Collaboration in React, React Project Roadmap, Task Assignment in React, React Project Timeline">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <meta name="author" content="Dominic N">
+
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/assets/images/favicon.ico" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/assets/css/ess.css" />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -24,11 +30,16 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React Project Manager App</title>
   </head>
-  <body>
+  <body class="loading">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root" class="app-container"></div>
+    <div class="loader spin">
+      <div class="spin__blocker"></div>
+      <div class="spin__bottom-left"></div>
+      <div class="spin__bottom-right"></div>
+      <div class="spin__top-left"></div>
+    </div>
+    <div id="root"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

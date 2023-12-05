@@ -1,7 +1,7 @@
 // context/FirestoreContext.js
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { getFirestore } from 'firebase/firestore';
-import { firebase } from '../firebase/firebaseConfig';
+import { firestore } from '../firebase/firebaseConfig';
 
 const FirestoreContext = createContext();
 
@@ -10,7 +10,7 @@ const FirestoreProvider = ({ children }) => {
 
   useEffect(() => {
     // Initialize Firestore
-    const firestore = getFirestore(firebase);
+    // const firestore_ = getFirestore({firestore});
     setDb(firestore);
   }, []);
 

@@ -301,6 +301,9 @@ h3.error p.error{
 h3.error p.success{
   color: #034a03;
 }
+h3.error p.warn{
+  color: #ca8403;
+}
 
 /*------------------------------------------------------------------
 [ Input ]*/

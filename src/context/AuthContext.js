@@ -1,45 +1,141 @@
 // context/AuthContext.js
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { getAuth, updateProfile, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { app, firestore } from '../firebase/firebaseConfig';
+import { doc, getFirestore,setDoc, getDoc } from "firebase/firestore";
 
 const AuthContext = createContext();
 
+const currentAuth = () => {
+  return getAuth(app)
+}
+const createUser = async () => {
+  let user = null;
+  if(currentAuth().currentUser){
+    const User_ = currentAuth().currentUser;
+    user = {
+      uid:User_.uid,
+      email:User_.email,
+      displayName: User_.displayName,
+      emailVerified: User_.emailVerified
+    };
 
-const AuthProvider = ({ children }) => {
+    try{
+      const userDetailsRef = doc(firestore, 'userDetails', User_.uid);
+
+      const userDetailsSnapshot = await getDoc(userDetailsRef);
+      if (userDetailsSnapshot.exists()) {
+        const userDetailsData = userDetailsSnapshot.data();
+        if(userDetailsData.firstName && userDetailsData.lastName){
+          user.firstName = userDetailsData.firstName;
+          user.lastName = userDetailsData.lastName;
+          user.updatedDetails = true;
+        }else{
+          user.updatedDetails = false;
+        }
+      } else {
+        user.updatedDetails = false;
+      }
+    }catch(err){
+      user.updatedDetails = false;
+    }
+  }
+
+  return user;
+}
+
+const AuthProvider = React.memo(({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  const auth = getAuth(app);
+  const auth = currentAuth();
+  const firestore = getFirestore();
+
+  const [authenticated, setAuthenticated] = useState(!!auth.currentUser);
+
+  if(authenticated && !user){
+    let usr = createUser();
+    setUser(usr);
+  }
+
+  console.log(authenticated);
+  const clearData = () => {
+    const storedUser = localStorage.getItem('reactpackagemangeruser');
+    if (storedUser) {
+      localStorage.removeItem('reactpackagemangeruser');
+    }
+  }
+
+  useEffect(() => {
+
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setAuthenticated(true);
+        setUser(user);
+      } else {
+        setAuthenticated(false);
+        setUser(null);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array to run the effect only once
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
-      setLoading(false);
+      setAuthenticated(!!user);
     });
 
     return () => unsubscribe();
   }, [auth]);
 
+
   const signup = async (email, password, firstName, lastName, username) => {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-      await userCredential.user.updateProfile({
-        displayName: username,
-      });
+      // Get the user object
+      const user = userCredential.user;
 
-      const newUser = {
-        uid: userCredential.user.uid,
-        email: userCredential.user.email,
-        firstName,
-        lastName,
-        username
+      const userId = userCredential.user.uid;
+      const userDetailsData = {
+        userId: userId,
+        firstName: firstName,
+        lastName: lastName
       };
 
-      setUser(newUser);
+
+      try{
+        // Now, update the profile
+        await updateProfile(user, {
+          displayName: username
+        });
+        userDetailsData['displayName'] = username;
+      }catch(error){
+
+        userDetailsData['warning'] =  'Account created successfuly but the display name has not been updated.<br>You can update it in the user setting.';
+      }
+
+      try{
+        const userDocRef = doc(firestore, 'userDetails', userId);
+        await setDoc(userDocRef, userDetailsData);
+      }catch(error){
+        const msg = 'Account created but Name details have not been updated. You can update it in User setting page';
+
+
+        userDetailsData['warning'] = (!userDetailsData.warning)?msg:'<br><br>'+msg;
+      }
+
+
+      setUser(userDetailsData);
+
+      setAuthenticated(true);
+      return userDetailsData;
     } catch (error) {
+      setAuthenticated(false);
       return error;
       //throw error;
     }
@@ -47,12 +143,50 @@ const AuthProvider = ({ children }) => {
 
   const signin = async (email, password) => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+      // console.log(userCredential, userCredential.user);
+
+      const User_ = userCredential.user;
+      const User = {
+        uid:User_.uid,
+        email:User_.email,
+        displayName: User_.displayName,
+        emailVerified: User_.emailVerified
+      };
+
+      const userDetailsRef = doc(firestore, 'userDetails', User_.uid);
+
+      // Get the document snapshot
+      const userDetailsSnapshot = await getDoc(userDetailsRef);
+
+      // Check if the document exists
+      if (userDetailsSnapshot.exists()) {
+        const userDetailsData = userDetailsSnapshot.data();
+        if(userDetailsData.firstName && userDetailsData.lastName){
+          User.firstName = userDetailsData.firstName;
+          User.lastName = userDetailsData.lastName;
+          User.updatedDetails = true;
+        }else{
+          User.updatedDetails = false;
+        }
+      } else {
+        User.updatedDetails = false;
+        console.log('User details document does not exist.');
+      }
+
+      setUser(User);
+      setAuthenticated(true);
+
+      localStorage.setItem('reactpackagemangeruser', JSON.stringify(User));
+
     } catch (error) {
-      console.error('Sign in failed:', error.message);
-      throw error;
+      setAuthenticated(false);
+      return error;
     }
   };
+
+
 
   const signOutUser = async () => {
     try {
@@ -63,12 +197,14 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+
+
   return (
-    <AuthContext.Provider value={{ user, loading, signup, signin, signOut: signOutUser }}>
+    <AuthContext.Provider value={{ authenticated, user, signup, signin, signOut: signOutUser, clearData }}>
       {children}
     </AuthContext.Provider>
   );
-};
+});
 
 
 const useAuth = () => {
@@ -79,5 +215,5 @@ const useAuth = () => {
   return context;
 };
 
-export { AuthProvider, useAuth };
+export { AuthProvider, useAuth, currentAuth };
 

@@ -1,12 +1,10 @@
 // Signup.js
 import React, { useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useAuth } from '../context/AuthContext';
-import { _debugErrorMap } from '../context/ErrorContext';
+import { getErrorMessage } from '../context/ErrorContext';
 
 const Signup = () => {
-  const navigate = useNavigate();
   const { signup } = useAuth();
 
   const [email, setEmail] = useState('');
@@ -18,26 +16,48 @@ const Signup = () => {
 
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [warnMessage, setWarnMessage] = useState('');
 
   const errorRef = useRef(null);
 
-  
+  const scrollToMessage = () => {
+    errorRef.current && errorRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
   const handleSignup = async () => {
+    document.body.classList.add('loading');
     try {
-      setError('');
+
+      setError(''); setWarnMessage(''); setSuccessMessage('');
       const error = await signup(email, password, firstName, lastName, username);
-      const fullCode = error.code;
-      const errorMsg = getErrorMessage(fullCode.replace(/auth\//g, ''));
-      if (errorMsg) {
-        setError(errorMsg);
-        errorRef.current && errorRef.current.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        setSuccessMessage('Account created successfully. You can now log in.');
+      if(!error.uid && !error.warning){
+        document.body.classList.remove('loading');
+        console.log(error);
+        const fullCode = error.code;
+        const errorMsg = getErrorMessage(fullCode.replace(/auth\//g, ''));
+        if (errorMsg) {
+          setError(errorMsg);
+          scrollToMessage();
+        } 
+      }else if(error.warning){
+        setWarnMessage(error.warning);
+        scrollToMessage();
+      }else {
+        setSuccessMessage(error.email + ' Account created successfully. You can now log in.');
+        scrollToMessage();
+
+        setEmail('');
+        setPassword('');
+
+        setFirstName('');
+        setLastName('');
+        setUsername('');
       }
     } catch (error) {
 
       setError('Failed to create an account. Please try again.');
-      errorRef.current && errorRef.current.scrollIntoView({ behavior: 'smooth' });
+      scrollToMessage();
+    }finally {
+      document.body.classList.remove('loading');
     }
   };
 
@@ -45,42 +65,33 @@ const Signup = () => {
     e.preventDefault(); 
     handleSignup(); 
   };
-    // Update error state when input values change
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+  const clearMessages = () => {
     setError(''); // Clear the error when email changes
     setSuccessMessage('');
+    setWarnMessage('');
+  }
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    clearMessages();
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    setError(''); // Clear the error when password changes
-    setSuccessMessage('');
+    clearMessages();
   };
   const handleFnameChange = (e) => {
     setFirstName(e.target.value);
-    setError(''); // Clear the error when password changes
-    setSuccessMessage('');
+    clearMessages();
   };
   const handleSnameChange = (e) => {
     setLastName(e.target.value);
-    setError(''); // Clear the error when password changes
-    setSuccessMessage('');
+    clearMessages();
   };
   const handleUnameChange = (e) => {
     setUsername(e.target.value);
-    setError(''); // Clear the error when password changes
-    setSuccessMessage('');
+    clearMessages();
   };
-  const getErrorMessage = (errorCode) =>{
-    const errorMessage = _debugErrorMap[errorCode];
-
-    if (errorMessage) {
-      return errorMessage;
-    } else {
-      return 'An unknown error occurred. contact admin for assistance';
-    }
-  }
+  
 
   return (
     <>
@@ -105,6 +116,7 @@ const Signup = () => {
               <h3 ref={errorRef} className="error">
                 {error && <p className="p-t-30 error">{error}</p>}
                 {successMessage && <p className="p-t-30 success">{successMessage}</p>}
+                {warnMessage && <p className="p-t-30 warn">{warnMessage}</p>}
               </h3>
               <div className="p-t-31 p-b-9">
                 <span className="txt1">

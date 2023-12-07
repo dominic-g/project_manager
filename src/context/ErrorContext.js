@@ -154,8 +154,17 @@ const _debugErrorMap = {
     'invalid-recaptcha-version': 'The reCAPTCHA version is invalid when sending request to the backend.',
     'invalid-req-type': 'Invalid request parameters.',
     'unsupported-password-policy-schema-version': 'The password policy received from the backend uses a schema version that is not supported by this version of the Firebase SDK.',
-    'password-does-not-meet-requirements': 'The password does not meet the requirements.'
+    'password-does-not-meet-requirements': 'The password does not meet the requirements.',
+    'permission-denied':'Permission denied for the previous action'
   };
+const getErrorMessage = (errorCode) =>{
+    const errorMessage = _debugErrorMap[errorCode];
 
+    if (errorMessage) {
+      return errorMessage;
+    } else {
+      return 'An unknown error occurred. contact admin for assistance';
+    }
+  }
 
-export {_debugErrorMap};
+export {_debugErrorMap, getErrorMessage};

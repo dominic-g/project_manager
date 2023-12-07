@@ -1,22 +1,24 @@
 // src/App.js
-import React, { useState, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { FirebaseProvider } from './providers/FirebaseProvider';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
-import Home from './components/Home';
+import {Home, Landing} from './components/Home';
 import ProjectDetail from './components/ProjectDetail';
 import { useAuth } from './context/AuthContext';
 import './App.css';
 
+
 const App = () => {
-  const [projects, setProjects] = useState([]);
-  const [notifications, setNotifications] = useState([]);
 
-  const { user } = useAuth();
+  const { authenticated } = useAuth();
+  console.log(authenticated);
 
- 
+
+
   useEffect(() => {
+
     const removeLoadingClass = () => {
       document.body.classList.remove('loading');
     };
@@ -29,6 +31,9 @@ const App = () => {
     };
   }, []);
 
+
+
+
   return (
 
     <FirebaseProvider>
@@ -37,15 +42,14 @@ const App = () => {
 
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Landing />}/>
         <Route
-          exact
-          path="/"
-          element={user ? <Home /> : <Navigate replace to={"/login"} />}
+          path="/home"
+          element={authenticated ? <Home /> : <Navigate replace to="/login" />}
         />
         <Route
-          exact
           path="/project/:id"
-          element={user ? <ProjectDetail /> : <Navigate replace to={"/login"} />}
+          element={authenticated ? <ProjectDetail /> : <Navigate replace to="/login" />}
         />
 
         </Routes>

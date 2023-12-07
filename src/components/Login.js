@@ -1,12 +1,14 @@
 // Login.js
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect  } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useAuth } from '../context/AuthContext';
+import { getErrorMessage } from '../context/ErrorContext';
+import { getAuth, signOut } from 'firebase/auth';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { signin } = useAuth();
+  const {signin, authenticated, clearData } = useAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,13 +16,48 @@ const Login = () => {
 
   const errorRef = useRef(null);
 
+  useEffect(() => {
+    const auth = getAuth();
+
+    console.log(authenticated);
+    if (authenticated) {
+      console.log('User is already logged in. Logging out.');
+      signOut(auth)
+        .then(() => {
+          clearData();
+          console.log('User logged out successfully.');
+        })
+        .catch((error) => {
+          // Handle errors if needed
+          console.error('Error logging out:', error.message);
+        });
+    }else{
+      clearData();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array to run the effect only once
   const handleLogin = async () => {
+    document.body.classList.add('loading');
     try {
       setError('');
-      await signin(email, password);
-      navigate('/');
+      const error = await signin(email, password);
+
+      document.body.classList.remove('loading');
+      if(error){
+        console.log(error.code);
+        const fullCode = error.code;
+        let errorMsg = getErrorMessage(fullCode.replace(/auth\//g, ''));
+        if (!errorMsg) {
+          errorMsg = "Sorry login failed could not verify the credentials given.";
+        } 
+        setError(errorMsg);
+        errorRef.current && errorRef.current.scrollIntoView({ behavior: 'smooth' });
+      }else{
+        navigate('/');
+      }
+
     } catch (error) {
-      setError('Failed to log in. Check your email and password.');
+      setError('Failed to log in. '+ error);
       errorRef.current && errorRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -54,7 +91,7 @@ const Login = () => {
               <span className="login100-form-title">
                 Sign In
               </span>
-              <h3 ref={errorRef} className="error">{error && <p className="p-t-30">{error}</p>}</h3>
+              <h3 ref={errorRef} className="error">{error && <p className="p-t-30 error">{error}</p>}</h3>
               <div className="p-t-31 p-b-9">
                 <span className="txt1">
                   Login
@@ -70,7 +107,7 @@ const Login = () => {
                   Password
                 </span>
 
-                <a href="#" className="txt2 bo1 m-l-5">
+                <a href="/forgot-password" className="txt2 bo1 m-l-5">
                   Forgot?
                 </a>
               </div>

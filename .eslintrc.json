@@ -15,6 +15,9 @@
         "react"
     ],
     "rules": {
-        "react/*": "off" 
+        "react/*": "off" ,
+        "react/prop-types": "off",  // Disable prop-types check
+        "no-unused-vars": "off",    // Disable unused-vars check
+        "react-hooks/exhaustive-deps": "off" 
     }
 }

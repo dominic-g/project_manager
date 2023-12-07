@@ -35,7 +35,9 @@ jobs:
       - name: Deploy to GitHub Pages
         run: |
           # Your deployment command here, for example:
-          npx gh-pages -d build
+          # npx gh-pages -d build
+          npx gh-pages -d build -u "dominic-g" -b "gh-pages" -t "${{ secrets.REACT_TOKEN }}"
+
         env:
           CI: false
           GENERATE_SOURCEMAP: false

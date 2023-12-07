@@ -19,7 +19,6 @@ const Login = () => {
   useEffect(() => {
     const auth = getAuth();
 
-    console.log(authenticated);
     if (authenticated) {
       console.log('User is already logged in. Logging out.');
       signOut(auth)

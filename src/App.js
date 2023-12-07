@@ -2,60 +2,59 @@
 import React, {  useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { FirebaseProvider } from './providers/FirebaseProvider';
-import SignUp from './components/SignUp';
-import Login from './components/Login';
 import {Home, Landing} from './components/Home';
-import ProjectDetail from './components/ProjectDetail';
 import { useAuth } from './context/AuthContext';
 import './App.css';
+import SignUp from './components/SignUp';
+import Login from './components/Login';
+import ProjectDetail from './components/ProjectDetail';
 
 
 const App = () => {
 
-  const { authenticated } = useAuth();
-  console.log(authenticated);
-
-
+  const { authenticated, gotResponse } = useAuth();
 
   useEffect(() => {
 
     const removeLoadingClass = () => {
-      document.body.classList.remove('loading');
-    };
-
-    window.onload = removeLoadingClass;
-
-    // Cleanup the event listener on component unmount
-    return () => {
-      window.onload = null;
-    };
-  }, []);
-
-
+          document.body.classList.remove('loading');
+        };
+    
+        window.onload = removeLoadingClass;
+    
+        // Cleanup the event listener on component unmount
+        return () => {
+          window.onload = null;
+        };
+  }, [gotResponse]);
 
 
-  return (
+    return (
 
-    <FirebaseProvider>
-      <Router>
-        <Routes>
+      <FirebaseProvider>
+        <Router>
+          <Routes>
 
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Landing />}/>
-        <Route
-          path="/home"
-          element={authenticated ? <Home /> : <Navigate replace to="/login" />}
-        />
-        <Route
-          path="/project/:id"
-          element={authenticated ? <ProjectDetail /> : <Navigate replace to="/login" />}
-        />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/landing" element={<Landing />} />
+          <Route path="/" element={authenticated ? <Home /> : <Landing />}/>
+          <Route
+            exact
+            path="/home"
+            element={authenticated ? <Home /> : <Navigate replace to="/login" />}
+          />
+          <Route
+            exact
+            path="/project/:id"
+            element={authenticated ? <ProjectDetail /> : <Navigate replace to="/login" />}
+          />
 
-        </Routes>
-      </Router>
-    </FirebaseProvider>
-  );
+          </Routes>Home
+        </Router>
+      </FirebaseProvider>
+    );
+  
 };
 
 export default App;

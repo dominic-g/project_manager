@@ -45,19 +45,22 @@ const createUser = async () => {
 }
 
 const AuthProvider = React.memo(({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(currentAuth());
+  
 
   const auth = currentAuth();
   const firestore = getFirestore();
 
-  const [authenticated, setAuthenticated] = useState(!!auth.currentUser);
+  const storedUser = localStorage.getItem('reactpackagemangeruser');
+
+  const [authenticated, setAuthenticated] = useState(!!storedUser);
+  const [gotResponse, setGotResponse] = useState(false);
 
   if(authenticated && !user){
     let usr = createUser();
     setUser(usr);
   }
 
-  console.log(authenticated);
   const clearData = () => {
     const storedUser = localStorage.getItem('reactpackagemangeruser');
     if (storedUser) {
@@ -66,14 +69,28 @@ const AuthProvider = React.memo(({ children }) => {
   }
 
   useEffect(() => {
-
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const fetchData = async () => {
+      const user = await createUser();
       if (user) {
         setAuthenticated(true);
         setUser(user);
+        setGotResponse(true); 
       } else {
         setAuthenticated(false);
         setUser(null);
+        setGotResponse(true); 
+      }
+    };
+
+
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      
+      if (user) {
+        fetchData();
+      } else {
+        setAuthenticated(false);
+        setUser(null);
+        setGotResponse(true); 
       }
     });
 
@@ -83,14 +100,14 @@ const AuthProvider = React.memo(({ children }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array to run the effect only once
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-      setAuthenticated(!!user);
-    });
-
-    return () => unsubscribe();
-  }, [auth]);
+  {/*useEffect(() => {
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        setUser(user);
+        setAuthenticated(!!user);
+      });
+  
+      return () => unsubscribe();
+    }, [auth]);*/}
 
 
   const signup = async (email, password, firstName, lastName, username) => {
@@ -200,7 +217,7 @@ const AuthProvider = React.memo(({ children }) => {
 
 
   return (
-    <AuthContext.Provider value={{ authenticated, user, signup, signin, signOut: signOutUser, clearData }}>
+    <AuthContext.Provider value={{ authenticated, user, signup, signin, signOut: signOutUser, clearData, gotResponse }}>
       {children}
     </AuthContext.Provider>
   );

@@ -89,7 +89,7 @@ const Landing = () => {
 
                            <div className="owl-carousel owl-theme" id="project-slide">
                                 <div className="item project-wrapper" data-aos="fade-up" data-aos-delay="100">
-                                     <img src="images/project/project-image01.jpg" className="img-fluid" alt="project image"/>
+                                     <img src="images/project/project-image01.jpg" className="img-fluid" alt="project"/>
 
                                      <div className="project-info">
                                           <small>Marketing</small>
@@ -104,7 +104,7 @@ const Landing = () => {
                                 </div>
 
                                 <div className="item project-wrapper" data-aos="fade-up">
-                                     <img src="images/project/project-image02.jpg" className="img-fluid" alt="project image"/>
+                                     <img src="images/project/project-image02.jpg" className="img-fluid" alt="project"/>
 
                                      <div className="project-info">
                                           <small>Website</small>
@@ -119,7 +119,7 @@ const Landing = () => {
                                 </div>
 
                                 <div className="item project-wrapper" data-aos="fade-up">
-                                     <img src="images/project/project-image03.jpg" className="img-fluid" alt="project image"/>
+                                     <img src="images/project/project-image03.jpg" className="img-fluid" alt="project"/>
 
                                      <div className="project-info">
                                           <small>Branding</small>
@@ -134,7 +134,7 @@ const Landing = () => {
                                 </div>
 
                                 <div className="item project-wrapper" data-aos="fade-up">
-                                     <img src="images/project/project-image04.jpg" className="img-fluid" alt="project image"/>
+                                     <img src="images/project/project-image04.jpg" className="img-fluid" alt="project"/>
 
                                      <div className="project-info">
                                           <small>Social Media</small>
@@ -149,7 +149,7 @@ const Landing = () => {
                                 </div>
 
                                 <div className="item project-wrapper" data-aos="fade-up">
-                                     <img src="images/project/project-image05.jpg" className="img-fluid" alt="project image"/>
+                                     <img src="images/project/project-image05.jpg" className="img-fluid" alt="project"/>
 
                                      <div className="project-info">
                                           <small>Video</small>
@@ -219,7 +219,7 @@ const Landing = () => {
                 </p>
 
                 <p>
-                  <a href="#">
+                  <a href="/">
                     <i className="fa fa-envelope mr-2 footer-icon"></i>
                     hello@company.com
                   </a>
@@ -244,18 +244,18 @@ const Landing = () => {
               <div className="col-lg-4 mx-lg-auto col-md-6 col-12" data-aos="fade-up" data-aos-delay="500">
                 
                 <ul className="footer-link">
-                  <li><a href="#">Stories</a></li>
-                  <li><a href="#">Work with us</a></li>
-                  <li><a href="#">Privacy</a></li>
+                  <li><a href="/">Stories</a></li>
+                  <li><a href="/">Work with us</a></li>
+                  <li><a href="/">Privacy</a></li>
                 </ul>
               </div>
 
               <div className="col-lg-3 mx-lg-auto col-md-6 col-12" data-aos="fade-up" data-aos-delay="600">
                 <ul className="social-icon">
-                  <li><a href="#" className="fa fa-instagram"></a></li>
-                  <li><a href="#" className="fa fa-twitter"></a></li>
-                  <li><a href="#" className="fa fa-dribbble"></a></li>
-                  <li><a href="#" className="fa fa-behance"></a></li>
+                  <li><a href="/" className="fa fa-instagram"></a></li>
+                  <li><a href="/" className="fa fa-twitter"></a></li>
+                  <li><a href="/" className="fa fa-dribbble"></a></li>
+                  <li><a href="/" className="fa fa-behance"></a></li>
                 </ul>
               </div>
 

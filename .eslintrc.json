@@ -18,6 +18,8 @@
         "react/*": "off" ,
         "react/prop-types": "off",  // Disable prop-types check
         "no-unused-vars": "off",    // Disable unused-vars check
-        "react/no-unknown-property": "off" 
+        "react/no-unknown-property": "off",
+        "react/display-name": "off" ,
+        "react-hooks/exhaustive-deps": "off" 
     }
 }

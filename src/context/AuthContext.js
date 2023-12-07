@@ -100,14 +100,7 @@ const AuthProvider = React.memo(({ children }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array to run the effect only once
 
-  {/*useEffect(() => {
-      const unsubscribe = onAuthStateChanged(auth, (user) => {
-        setUser(user);
-        setAuthenticated(!!user);
-      });
-  
-      return () => unsubscribe();
-    }, [auth]);*/}
+
 
 
   const signup = async (email, password, firstName, lastName, username) => {

@@ -42,7 +42,7 @@ jobs:
         run: |
           # Your deployment command here, for example:
           # npx gh-pages -d build
-          npx gh-pages -d build -t "${{ secrets.REACT_TOKEN }}"
+          npx gh-pages -d build -u "dominicnjoroge1@gmail.com" -b "gh-pages" -t "${{ secrets.REACT_TOKEN }}"
 
         env:
           CI: false

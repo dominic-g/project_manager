@@ -34,6 +34,9 @@ jobs:
 
       - name: Deploy to GitHub Pages
         run: |
+          # Configure Git user information
+          git config user.name "Dominic Gitau"
+          git config user.email "dominicnjoroge1@gmail.com"
           # Your deployment command here, for example:
           # npx gh-pages -d build
           npx gh-pages -d build -u "dominic-g" -b "gh-pages" -t "${{ secrets.REACT_TOKEN }}"

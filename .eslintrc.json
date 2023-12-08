@@ -12,7 +12,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-hooks"
     ],
     "rules": {
         "react/*": "off" ,
@@ -20,6 +21,8 @@
         "no-unused-vars": "off",    // Disable unused-vars check
         "react/no-unknown-property": "off",
         "react/display-name": "off" ,
-        "react-hooks/exhaustive-deps": "off" 
+        "react-hooks/exhaustive-deps": "off",
+        "react/react-in-jsx-scope": "off",
+        "no-undef": "off" 
     }
 }

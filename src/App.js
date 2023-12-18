@@ -7,6 +7,8 @@ import { useAuth } from './context/AuthContext';
 import './App.css';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
+import Projects from './components/Projects';
+import Tasks from './components/Tasks';
 import ProjectDetail from './components/ProjectDetail';
 
 
@@ -43,6 +45,16 @@ const App = () => {
             exact
             path="/home"
             element={authenticated ? <Home /> : <Navigate replace to="/login" />}
+          />
+          <Route
+            exact
+            path="/projects"
+            element={authenticated ? <Projects /> : <Navigate replace to="/login" />}
+          />
+          <Route
+            exact
+            path="/tasks"
+            element={authenticated ? <Tasks /> : <Navigate replace to="/login" />}
           />
           <Route
             exact

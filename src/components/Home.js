@@ -1,13 +1,27 @@
 // src/components/Home.js
 import React from 'react';
-import Header from './Header';
+import Dashboard from './Dashboard';
 import { Helmet } from 'react-helmet-async';
 // import { NavLink } from 'react-router-dom';
 
 const Home = ({ projects, notifications }) => {
   const pageTitle = "Home";
   return (
-    <Header title={pageTitle} />
+    <>
+
+      <Helmet>
+        <link rel="stylesheet" href={`${process.env.PUBLIC_URL}/assets/css/main.e6515412.css`}/>
+        <title>Project Manager | Dashboard</title>
+
+      </Helmet>
+      {/*<Header title={pageTitle} />*/}
+      <Dashboard title={pageTitle} />
+      
+    </>
+   
+      
+      
+    
   );
 };
 
@@ -23,7 +37,7 @@ const Landing = () => {
   
         <title>Project Manager | Manage your Projects Easily</title>
       </Helmet>
-      <Header title={pageTitle} />
+      {/*<Header title={pageTitle} />*/}
 
        <section className="hero hero-bg d-flex justify-content-center align-items-center">
                  <div className="container">

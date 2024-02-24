@@ -62,7 +62,7 @@ const App = () => {
             element={authenticated ? <ProjectDetail /> : <Navigate replace to="/login" />}
           />
 
-          </Routes>Home
+          </Routes>
         </Router>
       </FirebaseProvider>
     );

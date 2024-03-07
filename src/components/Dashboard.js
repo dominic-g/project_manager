@@ -3,7 +3,7 @@ import Left from './Left';
 import Nav from './Nav';
 import Chart from "react-apexcharts";
 
-const Header = ({title}) => {
+const Header = ({title, isActive, toggleSidebar}) => {
   const user = 'Dominic N'
 
   const state = {     
@@ -62,9 +62,9 @@ const Header = ({title}) => {
   }
   return (
     <div id="mytask-layout" className="theme-indigo">
-      <Left />
+      <Left value={isActive}/>
       <div className="main px-lg-4 px-md-4">
-        <Nav />
+        <Nav value={toggleSidebar}/>
         <div className="body d-flex py-lg-3 py-md-2">
           <div className="container-xxl">
             <div className="row clearfix g-3">
@@ -1001,74 +1001,62 @@ const Header = ({title}) => {
                                       >
                                         <g
                                           id="SvgjsG1451"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1453"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1455"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1457"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1459"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1461"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1463"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1465"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1467"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1469"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1471"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1473"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                       </g>
@@ -1339,74 +1327,62 @@ const Header = ({title}) => {
                                       >
                                         <g
                                           id="SvgjsG1478"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1480"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1482"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1484"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1486"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1488"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1490"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1492"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1494"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1496"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1498"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1500"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                       </g>
@@ -1677,74 +1653,62 @@ const Header = ({title}) => {
                                       >
                                         <g
                                           id="SvgjsG1505"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1507"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1509"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1511"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1513"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1515"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1517"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1519"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1521"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1523"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1525"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1527"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                       </g>
@@ -2015,74 +1979,62 @@ const Header = ({title}) => {
                                       >
                                         <g
                                           id="SvgjsG1532"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1534"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1536"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1538"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1540"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1542"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1544"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1546"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1548"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1550"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1552"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                         <g
                                           id="SvgjsG1554"
-                                          classname="apexcharts-bar-goals-groups"
-                                          className="apexcharts-hidden-element-shown"
+                                          className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                           clipPath="url(#gridRectMarkerMaskgh3hwbnr)"
                                         />
                                       </g>
@@ -4110,32 +4062,27 @@ const Header = ({title}) => {
                                 >
                                   <g
                                     id="SvgjsG2313"
-                                    classname="apexcharts-bar-goals-groups"
-                                    className="apexcharts-hidden-element-shown"
+                                    className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                     clipPath="url(#gridRectMarkerMask45p2wp51)"
                                   />
                                   <g
                                     id="SvgjsG2315"
-                                    classname="apexcharts-bar-goals-groups"
-                                    className="apexcharts-hidden-element-shown"
+                                    className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                     clipPath="url(#gridRectMarkerMask45p2wp51)"
                                   />
                                   <g
                                     id="SvgjsG2317"
-                                    classname="apexcharts-bar-goals-groups"
-                                    className="apexcharts-hidden-element-shown"
+                                    className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                     clipPath="url(#gridRectMarkerMask45p2wp51)"
                                   />
                                   <g
                                     id="SvgjsG2319"
-                                    classname="apexcharts-bar-goals-groups"
-                                    className="apexcharts-hidden-element-shown"
+                                    className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                     clipPath="url(#gridRectMarkerMask45p2wp51)"
                                   />
                                   <g
                                     id="SvgjsG2321"
-                                    classname="apexcharts-bar-goals-groups"
-                                    className="apexcharts-hidden-element-shown"
+                                    className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                     clipPath="url(#gridRectMarkerMask45p2wp51)"
                                   />
                                 </g>
@@ -4269,32 +4216,27 @@ const Header = ({title}) => {
                                 >
                                   <g
                                     id="SvgjsG2326"
-                                    classname="apexcharts-bar-goals-groups"
-                                    className="apexcharts-hidden-element-shown"
+                                    className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                     clipPath="url(#gridRectMarkerMask45p2wp51)"
                                   />
                                   <g
                                     id="SvgjsG2328"
-                                    classname="apexcharts-bar-goals-groups"
-                                    className="apexcharts-hidden-element-shown"
+                                    className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                     clipPath="url(#gridRectMarkerMask45p2wp51)"
                                   />
                                   <g
                                     id="SvgjsG2330"
-                                    classname="apexcharts-bar-goals-groups"
-                                    className="apexcharts-hidden-element-shown"
+                                    className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                     clipPath="url(#gridRectMarkerMask45p2wp51)"
                                   />
                                   <g
                                     id="SvgjsG2332"
-                                    classname="apexcharts-bar-goals-groups"
-                                    className="apexcharts-hidden-element-shown"
+                                    className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                     clipPath="url(#gridRectMarkerMask45p2wp51)"
                                   />
                                   <g
                                     id="SvgjsG2334"
-                                    classname="apexcharts-bar-goals-groups"
-                                    className="apexcharts-hidden-element-shown"
+                                    className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                     clipPath="url(#gridRectMarkerMask45p2wp51)"
                                   />
                                 </g>
@@ -4428,32 +4370,27 @@ const Header = ({title}) => {
                                 >
                                   <g
                                     id="SvgjsG2339"
-                                    classname="apexcharts-bar-goals-groups"
-                                    className="apexcharts-hidden-element-shown"
+                                    className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                     clipPath="url(#gridRectMarkerMask45p2wp51)"
                                   />
                                   <g
                                     id="SvgjsG2341"
-                                    classname="apexcharts-bar-goals-groups"
-                                    className="apexcharts-hidden-element-shown"
+                                    className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                     clipPath="url(#gridRectMarkerMask45p2wp51)"
                                   />
                                   <g
                                     id="SvgjsG2343"
-                                    classname="apexcharts-bar-goals-groups"
-                                    className="apexcharts-hidden-element-shown"
+                                    className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                     clipPath="url(#gridRectMarkerMask45p2wp51)"
                                   />
                                   <g
                                     id="SvgjsG2345"
-                                    classname="apexcharts-bar-goals-groups"
-                                    className="apexcharts-hidden-element-shown"
+                                    className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                     clipPath="url(#gridRectMarkerMask45p2wp51)"
                                   />
                                   <g
                                     id="SvgjsG2347"
-                                    classname="apexcharts-bar-goals-groups"
-                                    className="apexcharts-hidden-element-shown"
+                                    className="apexcharts-hidden-element-shown apexcharts-bar-goals-groups"
                                     clipPath="url(#gridRectMarkerMask45p2wp51)"
                                   />
                                 </g>

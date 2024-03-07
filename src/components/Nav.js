@@ -1,6 +1,9 @@
 import React from 'react';
 
-const Nav = () => {
+const Nav = ({ toggleSidebar }) => {
+
+
+  
 	return (
 		<div className="header">
           <nav className="navbar py-4">
@@ -10,7 +13,7 @@ const Nav = () => {
                   <a
                     className="nav-link text-primary collapsed info-page-icon"
                     title="Get Help"
-                    href="/template/my-task/react/help"
+                    href="/help"
                   >
                     <i className="icofont-info-square fs-5" />
                   </a>
@@ -79,7 +82,7 @@ const Nav = () => {
                   </a>
                 </div>
               </div>
-              <button className="navbar-toggler p-0 border-0 menu-toggle order-3">
+              <button className="navbar-toggler p-0 border-0 menu-toggle order-3" onClick={toggleSidebar}>
                 <span className="fa fa-bars" />
               </button>
               <div className="order-0 col-lg-4 col-md-4 col-sm-12 col-12 mb-3 mb-md-0 ">

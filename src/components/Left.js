@@ -1,9 +1,9 @@
 
 import React from 'react';
 
-const Left = ()  => {
+const Left = ({isActive})  => {
 	return (	
-      <div id="mainSideMenu" className="sidebar px-4 py-4 py-md-5 me-0 ">
+      <div id="mainSideMenu" className={`sidebar px-4 py-4 py-md-5 me-0 ${isActive ? 'active' : ''}`}>
         <div className="d-flex flex-column h-100">
           <a href="hr-dashboard" className="mb-0 brand-icon">
             <span className="logo-icon">

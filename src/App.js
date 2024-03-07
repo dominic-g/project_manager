@@ -1,5 +1,5 @@
 // src/App.js
-import React, {  useEffect } from 'react';
+import React, {  useEffect,useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { FirebaseProvider } from './providers/FirebaseProvider';
 import {Home, Landing} from './components/Home';
@@ -15,6 +15,12 @@ import ProjectDetail from './components/ProjectDetail';
 const App = () => {
 
   const { authenticated, gotResponse } = useAuth();
+
+  const [isActive, setIsActive] = useState(false);
+  const toggleSidebar = () => {
+    console.log("clicked " + isActive);
+    setIsActive(!isActive);
+  };
 
   useEffect(() => {
 
@@ -44,22 +50,22 @@ const App = () => {
           <Route
             exact
             path="/home"
-            element={authenticated ? <Home /> : <Navigate replace to="/login" />}
+            element={authenticated ? <Home value={{isActive, toggleSidebar}}/> : <Navigate replace to="/login" />}
           />
           <Route
             exact
             path="/projects"
-            element={authenticated ? <Projects /> : <Navigate replace to="/login" />}
+            element={authenticated ? <Projects  value={{isActive, toggleSidebar}}/> : <Navigate replace to="/login" />}
           />
           <Route
             exact
             path="/tasks"
-            element={authenticated ? <Tasks /> : <Navigate replace to="/login" />}
+            element={authenticated ? <Tasks  value={{isActive, toggleSidebar}}/> : <Navigate replace to="/login" />}
           />
           <Route
             exact
             path="/project/:id"
-            element={authenticated ? <ProjectDetail /> : <Navigate replace to="/login" />}
+            element={authenticated ? <ProjectDetail  value={{isActive, toggleSidebar}}/> : <Navigate replace to="/login" />}
           />
 
           </Routes>

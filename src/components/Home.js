@@ -4,7 +4,9 @@ import Dashboard from './Dashboard';
 import { Helmet } from 'react-helmet-async';
 // import { NavLink } from 'react-router-dom';
 
-const Home = ({ projects, notifications }) => {
+
+
+const Home = ({ isActive, toggleSidebar }) => {
   const pageTitle = "Home";
   return (
     <>
@@ -15,7 +17,7 @@ const Home = ({ projects, notifications }) => {
 
       </Helmet>
       {/*<Header title={pageTitle} />*/}
-      <Dashboard title={pageTitle} />
+      <Dashboard title={{pageTitle, isActive, toggleSidebar}}/>
       
     </>
    
